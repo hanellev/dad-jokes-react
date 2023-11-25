@@ -1,63 +1,32 @@
 import './style.css';
-import { useState } from 'react';
-import { jokes } from '../..';
+import { useState, useEffect } from 'react';
+import { Joke } from '../../components/Joke';
 
 export const HomePage = () => {
-	const [upLikes, setUpLikes] = useState(0);
-	const [downLikes, setDownLikes] = useState(0);
+	const [jokes, setJokes] = useState([]);
 
-	const handleUpClick = () => {
-		setUpLikes(upLikes + 1);
-	};
+	useEffect(() => {
+		const fetchData = async () => {
+			const response = await fetch('http://localhost:4000/api/jokes');
+			const data = await response.json();
+			setJokes(data.result);
+		};
 
-	const handleDownClick = () => {
-		setDownLikes(downLikes + 1);
-	};
+		fetchData();
+	}, []);
 
 	return (
 		<div className="container">
-			<div class="joke">
-				<div class="joke__body">
-					<div class="joke__user">
-						<img
-							class="user-avatar"
-							src="../users_img/user01.png"
-							alt="user avatar"
-						/>
-						<p class="user-name">Neroxx</p>
-					</div>
-
-					<p class="joke__text">
-						The secret service isn't allowed to yell "Get down!" anymore when
-						the president is about to be attacked. Now they have to yell
-						"Donald, duck!"
-					</p>
-				</div>
-				<div class="joke__likes">
-					<button
-						className="btn-like btn-like--up"
-						onClick={handleUpClick}
-					></button>
-					<span
-						className={`likes-count likes-count--up ${
-							upLikes > 0 ? 'active' : ''
-						}`}
-					>
-						{upLikes}
-					</span>
-					<button
-						className="btn-like btn-like--down"
-						onClick={handleDownClick}
-					></button>
-					<span
-						className={`likes-count likes-count--down ${
-							downLikes > 0 ? 'active' : ''
-						}`}
-					>
-						{downLikes}
-					</span>
-				</div>
-			</div>
+			{jokes.map((joke) => (
+				<Joke
+					key={joke.id}
+					userAvatar={joke.userAvatar}
+					user={joke.userName}
+					text={joke.text}
+					likes={joke.likes}
+					dislikes={joke.dislikes}
+				/>
+			))}
 		</div>
 	);
 };

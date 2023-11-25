@@ -16,36 +16,46 @@ export const HomePage = () => {
 
 	return (
 		<div className="container">
-			<div className="joke">
-				<div className="joke__body">
-					<div className="joke__user">
-						<div className="user-avatar"></div>
-						<div className="user-name"></div>
+			<div class="joke">
+				<div class="joke__body">
+					<div class="joke__user">
+						<img
+							class="user-avatar"
+							src="../users_img/user01.png"
+							alt="user avatar"
+						/>
+						<p class="user-name">Neroxx</p>
 					</div>
-					<div className="joke__text">
-						<button
-							className="btn-like btn-like--up"
-							onClick={handleUpClick}
-						></button>
-						<span
-							className={`likes-count likes-count--up ${
-								upLikes > 0 ? 'active' : ''
-							}`}
-						>
-							{upLikes}
-						</span>
-						<button
-							className="btn-like btn-like--down"
-							onClick={handleDownClick}
-						></button>
-						<span
-							className={`likes-count likes-count--down ${
-								downLikes > 0 ? 'active' : ''
-							}`}
-						>
-							{downLikes}
-						</span>
-					</div>
+
+					<p class="joke__text">
+						The secret service isn't allowed to yell "Get down!" anymore when
+						the president is about to be attacked. Now they have to yell
+						"Donald, duck!"
+					</p>
+				</div>
+				<div class="joke__likes">
+					<button
+						className="btn-like btn-like--up"
+						onClick={handleUpClick}
+					></button>
+					<span
+						className={`likes-count likes-count--up ${
+							upLikes > 0 ? 'active' : ''
+						}`}
+					>
+						{upLikes}
+					</span>
+					<button
+						className="btn-like btn-like--down"
+						onClick={handleDownClick}
+					></button>
+					<span
+						className={`likes-count likes-count--down ${
+							downLikes > 0 ? 'active' : ''
+						}`}
+					>
+						{downLikes}
+					</span>
 				</div>
 			</div>
 		</div>
